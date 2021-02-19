@@ -18,9 +18,8 @@ sudo find /var/www/html/ -type f -exec chmod 644 {} \;
 sudo mysql -e "SET PASSWORD FOR root@localhost = PASSWORD('${dev_mysql_root_password}');FLUSH PRIVILEGES;"
 sudo mysql -e "DELETE FROM mysql.user WHERE User='';"
 sudo mysql -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"
-sudo mysql -e "DROP DATABASE test;DELETE FROM mysql.db WHERE Db='test' OR Db='test_%';"
 sudo mysql -e "CREATE DATABASE IF NOT EXISTS ${dev_wordpress_db_name}"
-sudo mysql -u root -p${dev_mysql_root_password} -e "CREATE USER '${dev_wordpress_username}'@'localhost' IDENTIFIED BY '${dev_wordpress_password}';GRANT ALL PRIVILEGES ON *.* TO '${dev_wordpress_username}'@'localhost';FLUSH PRIVILEGES;"
+sudo mysql --user=root --password='${dev_mysql_root_password}' -e "CREATE USER '${dev_wordpress_username}'@'localhost' IDENTIFIED BY '${dev_wordpress_password}';GRANT ALL PRIVILEGES ON *.* TO '${dev_wordpress_username}'@'localhost';FLUSH PRIVILEGES;"
 
 #Restart Services
 sudo systemctl restart mysql

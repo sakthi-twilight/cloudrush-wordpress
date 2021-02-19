@@ -39,8 +39,8 @@ data "template_file" "dev_ec2_template" {
   template = file("templates/dev_ec2.tpl")
   vars = {
      dev_mysql_root_password = ""
-     dev_wordpress_db_name = "cloudrush-dev"
-     dev_wordpress_username = "cloudrushdev2021"
+     dev_wordpress_db_name = "cloudrush_dev"
+     dev_wordpress_username = "cloudrushdev"
      dev_wordpress_password = ""
   }
 }
