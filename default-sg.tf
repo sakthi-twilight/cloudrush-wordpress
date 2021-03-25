@@ -11,6 +11,14 @@ resource "aws_security_group" "cloudrush_internal_sg" {
         protocol    = "-1"
         cidr_blocks = ["42.111.138.65/32"]
     }
+
+    ingress {
+        description = "Twilight"
+        from_port   = 0
+        to_port     = 0
+        protocol    = "-1"
+        cidr_blocks = ["103.213.192.118/32"]
+    }
     
 
     egress {
@@ -22,6 +30,6 @@ resource "aws_security_group" "cloudrush_internal_sg" {
 
 
     tags = {
-        Name = "CloudRusInternalSG"
+        Name = "CloudRushInternalSG"
     }
 }

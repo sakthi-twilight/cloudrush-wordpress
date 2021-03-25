@@ -1,0 +1,32 @@
+---
+- hosts: 172.20.104.238
+  become: yes
+  gather_facts: no
+
+  tasks:
+  - name: Synchronize /var/www/html from Dev to Prod
+    synchronize:
+      src: /var/www/html/wp-content/
+      dest: /var/www/html/wp-content/
+    delegate_to: 172.20.104.38
+
+
+  - name: Take Dev Database Backup
+    mysql_db:
+      name: cloudrush_dev
+      state: dump
+      login_host: localhost
+      login_user: <Dev DB User>
+      login_password: '<Dev DB Password>'
+      target: /home/ubuntu/db_backups/backup.sql
+    delegate_to: 172.20.104.38
+
+  - name: Restore Dev Database to Production
+    mysql_db:
+      name: cloudrush_prd
+      state: import
+      target: /home/ubuntu/db_backups/backup.sql
+      login_host: <Prd RDS Host>
+      login_user: <Prd RDS User>
+      login_password: '<Prd RDS Password>'
+    delegate_to: 172.20.104.38

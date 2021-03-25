@@ -2,11 +2,11 @@
 
 
 variable "access_key" {
-     default = ""
+     default = "<Access Key>"
 }
 
 variable "secret_key" {
-     default = ""
+     default = "<Secret Key>"
 }
 
 
@@ -32,7 +32,15 @@ variable "dev_ami_id" {
      default = "ami-02aa7f3de34db391a"
 }
 
+variable "prod_ami_id" {
+     default = "ami-02aa7f3de34db391a"
+}
+
 variable "dev_instance_type" {
+     default = "t3.medium"
+}
+
+variable "prod_instance_type" {
      default = "t3.medium"
 }
 
@@ -41,4 +49,15 @@ variable "dev_key_name" {
      default = "cloudrush_dev_wordpress"
 }
 
+variable "prod_key_name" {
+     default = "cloudrush_prd_wordpress"
+}
+
+variable "dev_wordpress_target_arn" {
+	default = "arn:aws:elasticloadbalancing:us-east-2:762900496746:targetgroup/dev-wordpress-target/4e3b11d941a48894"
+}
+
+variable "cloud_rush_certificate_arn" {
+	default = "arn:aws:acm:us-east-2:762900496746:certificate/d6608ab6-216c-4233-95bc-55a7da8608d5"
+}
 
